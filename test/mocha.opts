@@ -1,0 +1,6 @@
+--compilers coffee:coffee-script
+--require coffee-script
+--require should
+--colors
+--reporter spec
+--growl
