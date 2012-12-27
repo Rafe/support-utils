@@ -128,3 +128,23 @@ describe "form_helper", ->
           users: [
             name: 'Jimmy'
           ]
+    it "should keep same value in middle of array", ->
+      body =
+        group:
+          name: 'test'
+          users: [{
+            name: 'Jimmy'
+          },{
+            name: ''
+          },{
+            name: 'test'
+          }]
+      form_helper.filterEmpty(body)
+      body.should.eql
+        group:
+          name: 'test'
+          users: [{
+            name: 'Jimmy'
+          },{
+            name: 'test'
+          }]

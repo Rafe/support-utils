@@ -74,8 +74,10 @@ isNumber = (n)->
           name: 'test'
           profile: ''
         }]
-      form_helper.filter(body)
+
+      form_helper.filterEmpty(body)
       console.log body # =>
+
       #users: [{
       # name: 'test'
       # profile: ''
@@ -87,11 +89,14 @@ exports.filterEmpty = filter = (attributes = '')->
   if attributes is ''
     return false
   else if Array.isArray(attributes)
+    toRemove = []
     for attribute, i in attributes
       if filter(attribute)
         keep = true
       else
-        attributes.splice(i,i+1)
+        toRemove.unshift(i)
+    for i in toRemove
+      attributes.splice(i, 1)
   else if typeof attributes is 'object'
     for key, value of attributes
       keep = true if filter(value)

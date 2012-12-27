@@ -11,4 +11,6 @@ describe 'password', ->
 
   it 'should be able to generate random salt', ->
     salt = password.generateSalt()
+    salt2 = password.generateSalt()
     salt.should.match /[a-z0-9]{40}/
+    salt.should.not.eql salt2
