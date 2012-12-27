@@ -1,6 +1,6 @@
 {
   "name": "support-utils",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Utils for cookhub",
   "main": "index.js",
   "scripts": {
