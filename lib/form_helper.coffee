@@ -60,3 +60,41 @@ build = (parent, params, value)->
 
 isNumber = (n)->
   !isNaN(parseInt(n))
+
+
+###
+  Filter empty objects in nested array
+
+  Example:
+      body =
+        users: [{
+          name: ''
+          profile: ''
+        },{
+          name: 'test'
+          profile: ''
+        }]
+      form_helper.filter(body)
+      console.log body # =>
+      #users: [{
+      # name: 'test'
+      # profile: ''
+      #}]
+###
+
+exports.filterEmpty = filter = (attributes = '')->
+  keep = false
+  if attributes is ''
+    return false
+  else if Array.isArray(attributes)
+    for attribute, i in attributes
+      if filter(attribute)
+        keep = true
+      else
+        attributes.splice(i,i+1)
+  else if typeof attributes is 'object'
+    for key, value of attributes
+      keep = true if filter(value)
+  else
+    keep = true
+  keep
